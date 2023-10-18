@@ -6,13 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="192dp"
-        android:layout_height="0dp"
-        android:text="TextView"
+    <Button
+        android:id="@+id/sign_button"
+        android:layout_width="150dp"
+        android:layout_height="49dp"
+        android:background="@drawable/rounded_background"
+        android:text="Sign In"
+        android:textSize="20dp"
+        android:fontFamily="@font/alata_regular"
+        android:textColor="@color/teal_100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
