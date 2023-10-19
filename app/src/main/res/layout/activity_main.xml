@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:background="@color/teal_700">
 
     <Button
         android:id="@+id/sign_button"
@@ -20,5 +21,83 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/main_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/bg_navbar"
+        android:layout_width="466dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/bg_navigation_bar"
+        tools:ignore="MissingConstraints,constraintlayout" />
+
+    <ImageView
+        android:id="@+id/home_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dashboard_button"
+        app:layout_constraintEnd_toStartOf="@+id/dashboard_button"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_button"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_home" />
+
+    <ImageView
+        android:id="@+id/dashboard_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.297"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_dashboard" />
+
+    <ImageView
+        android:id="@+id/settings_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/chat_button"
+        app:layout_constraintTop_toTopOf="@+id/chat_button"
+        app:srcCompat="@drawable/ic_settings" />
+
+    <ImageView
+        android:id="@+id/chat_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.727"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_chat" />
+
+    <ImageView
+        android:id="@+id/ball_button"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.961"
+        app:srcCompat="@drawable/ic_ball" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
