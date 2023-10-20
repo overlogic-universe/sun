@@ -60,19 +60,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register_password" />
 
-        <Button
-            android:id="@+id/register_button"
-            android:layout_width="183dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="56dp"
-            android:background="@drawable/rounded_background"
-            android:fontFamily="@font/alata_regular"
-            android:textSize="21dp"
-            android:text="REGISTER"
-            android:textColor="@color/white_teal"
-            app:layout_constraintStart_toStartOf="@+id/register_confirm"
-            app:layout_constraintTop_toBottomOf="@+id/register_confirm" />
-
         <ImageView
             android:id="@+id/ic_password_register"
             android:layout_width="19dp"
@@ -85,21 +72,6 @@
             app:layout_constraintStart_toStartOf="@+id/register_password"
             app:layout_constraintTop_toTopOf="@+id/register_password"
             app:layout_constraintVertical_bias="0.176" />
-
-        <TextView
-            android:id="@+id/text_or"
-            android:layout_width="71dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="12dp"
-            android:fontFamily="@font/alata_regular"
-            android:gravity="center"
-            android:text="OR"
-            android:textColor="@color/white_teal"
-            android:textSize="15dp"
-            app:layout_constraintBottom_toBottomOf="@+id/register_button"
-            app:layout_constraintStart_toEndOf="@+id/register_button"
-            app:layout_constraintTop_toTopOf="@+id/register_button"
-            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/ic_email_register"
@@ -143,20 +115,6 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
-            android:id="@+id/login_google"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/rounded_background"
-            android:padding="10dp"
-            android:src="@drawable/ic_google"
-            app:layout_constraintBottom_toBottomOf="@+id/register_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.229"
-            app:layout_constraintStart_toEndOf="@+id/text_or"
-            app:layout_constraintTop_toTopOf="@+id/register_button"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
             android:id="@+id/ic_arrow_register"
             android:layout_width="35dp"
             android:layout_height="35dp"
@@ -172,6 +130,7 @@
 
         <EditText
             android:id="@+id/register_name"
+            android:inputType="textPersonName"
             android:layout_width="337dp"
             android:layout_height="50dp"
             android:layout_marginTop="84dp"
@@ -195,6 +154,49 @@
             app:layout_constraintHorizontal_bias="0.975"
             app:layout_constraintStart_toStartOf="@+id/register_name"
             app:layout_constraintTop_toTopOf="@+id/register_name" />
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="183dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="56dp"
+            android:background="@drawable/rounded_background"
+            android:fontFamily="@font/alata_regular"
+            android:text="REGISTER"
+            android:gravity="center"
+            android:textColor="@color/white_teal"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/register_confirm"
+            app:layout_constraintTop_toBottomOf="@+id/register_confirm" />
+
+        <ImageView
+            android:id="@+id/login_google"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/rounded_background"
+            android:padding="10dp"
+            android:src="@drawable/ic_google"
+            app:layout_constraintBottom_toBottomOf="@+id/register_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.463"
+            app:layout_constraintStart_toEndOf="@+id/text_or"
+            app:layout_constraintTop_toTopOf="@+id/register_button"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/text_or"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="32dp"
+            android:fontFamily="@font/alata_regular"
+            android:gravity="center"
+            android:text="OR"
+            android:textColor="@color/white_teal"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/register_button"
+            app:layout_constraintStart_toEndOf="@+id/register_button"
+            app:layout_constraintTop_toTopOf="@+id/register_button"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/ic_confirm_register"

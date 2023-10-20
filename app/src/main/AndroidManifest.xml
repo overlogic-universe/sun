@@ -19,7 +19,8 @@
             android:name=".fragment.LoginFragment"
             android:exported="false"
             android:label="@string/title_activity_login_fragment"
-            android:theme="@style/Theme.SelfUnitNoted" />
+            android:theme="@style/Theme.SelfUnitNoted"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".activities.MainActivity"
             android:exported="true" >

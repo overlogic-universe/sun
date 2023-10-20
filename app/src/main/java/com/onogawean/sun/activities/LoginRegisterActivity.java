@@ -16,16 +16,6 @@ import com.onogawean.sun.fragment.RegisterFragment;
 
 public class LoginRegisterActivity extends AppCompatActivity {
 
-    public static boolean isLogin = true;
-
-    ImageView setLoginView, setRegisterView;
-
-    public void setFragment(Class <? extends Fragment> fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .add(R.id.login_register_fragment , fragment, null)
-                .commit();
-    }
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
