@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#10333E"
     tools:context=".fragment.ChatFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,7 +15,7 @@
         android:fontFamily="@font/alata_regular"
         android:gravity="center"
         android:textSize="40sp"
-        android:background="@color/teal_500"/>
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,27 +26,32 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:id="@+id/bottom_layout">
+        android:id="@+id/bottom_layout"
+        android:padding="8dp"
+        >
 
         <EditText
             android:id="@+id/message_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/send_btn"
             android:background="@drawable/rounded_background"
             android:hint="Ask Me Something"
             android:padding="16dp"
-            android:layout_toLeftOf="@id/send_btn"
             />
 
         <ImageButton
             android:id="@+id/send_btn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentEnd="true"
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
             android:padding="8dp"
-            android:src="@drawable/baseline_send_24" />
+            android:src="@drawable/baseline_send_24"
+
+
+            />
 
     </RelativeLayout>
 </RelativeLayout>
