@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#10333E"
     tools:context=".fragment.ChatFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,7 +14,44 @@
         android:textColor="@color/teal_200"
         android:fontFamily="@font/alata_regular"
         android:gravity="center"
-        android:textSize="40dp"
-        android:background="@color/teal_500"/>
+        android:textSize="40sp"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view"
+        android:layout_above="@id/bottom_layout"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottom_layout"
+        android:padding="8dp"
+        >
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/message_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/send_btn"
+            android:background="@drawable/rounded_background"
+            android:hint="Ask Me Something"
+            android:padding="16dp"
+            />
+
+        <ImageButton
+            android:id="@+id/send_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:src="@drawable/baseline_send_24"
+
+
+            />
+
+    </RelativeLayout>
+</RelativeLayout>
