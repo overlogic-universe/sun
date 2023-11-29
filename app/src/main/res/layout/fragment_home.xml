@@ -6,14 +6,5 @@
     tools:context=".fragment.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home"
-        android:textColor="@color/teal_200"
-        android:fontFamily="@font/alata_regular"
-        android:gravity="center"
-        android:textSize="40dp"
-        android:background="@color/teal_700"/>
 
 </FrameLayout>

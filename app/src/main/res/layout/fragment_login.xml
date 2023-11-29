@@ -139,7 +139,7 @@
             android:gravity="center"
             android:text="OR"
             android:textColor="@color/white_teal"
-            android:textSize="15dp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/login_button"
             app:layout_constraintStart_toEndOf="@+id/login_button"
             app:layout_constraintTop_toTopOf="@+id/login_button"
@@ -148,7 +148,7 @@
         <Button
             android:id="@+id/login_button"
             android:layout_width="185dp"
-            android:layout_height="44dp"
+            android:layout_height="50dp"
             android:layout_marginTop="56dp"
             android:background="@drawable/rounded_background"
             android:fontFamily="@font/alata_regular"
@@ -181,7 +181,7 @@
             android:text="Forgot Password ?"
             android:textColor="@color/teal_100"
             android:fontFamily="@font/alata_regular"
-            android:textSize="11dp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/login_button"
             app:layout_constraintEnd_toEndOf="@+id/login_password"
             app:layout_constraintHorizontal_bias="0.0"
@@ -189,5 +189,20 @@
             app:layout_constraintTop_toBottomOf="@+id/login_password"
             app:layout_constraintVertical_bias="0.378" />
 
+        <TextView
+            android:id="@+id/emptyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:fontFamily="sans-serif"
+            android:text="Email and Password Can't be Empty"
+            android:textColor="#FF0000"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_password" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>
