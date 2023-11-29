@@ -23,11 +23,12 @@
         android:layout_above="@id/bottom_layout"
         />
     <RelativeLayout
+        android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:id="@+id/bottom_layout"
         android:padding="8dp"
+
         >
 
         <EditText
@@ -38,8 +39,7 @@
             android:layout_toLeftOf="@id/send_btn"
             android:background="@drawable/rounded_background"
             android:hint="Ask Me Something"
-            android:padding="16dp"
-            />
+            android:padding="16dp" />
 
         <ImageButton
             android:id="@+id/send_btn"
@@ -50,8 +50,6 @@
             android:padding="8dp"
             android:src="@drawable/baseline_send_24"
 
-
             />
-
     </RelativeLayout>
 </RelativeLayout>

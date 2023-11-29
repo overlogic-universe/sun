@@ -3,16 +3,23 @@ package com.onogawean.sun.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.onogawean.sun.R;
+import com.onogawean.sun.adapter.ChatAdapter;
+import com.onogawean.sun.model.Chat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,9 +28,10 @@ import com.onogawean.sun.R;
  */
 public class ChatFragment extends Fragment {
     RecyclerView recyclerView;
-    TextView welcomeTextView;
-    EditText MessageEditText;
+    EditText messageEditText;
     ImageButton sendButton;
+    List<Chat> chatList;
+    ChatAdapter chatAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,7 +76,35 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        super.onCreate(savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);;
+        chatList = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.recycler_view);
+        messageEditText = view.findViewById(R.id.message_edit_text);
+        sendButton = view.findViewById(R.id.send_btn);
+        chatAdapter = new ChatAdapter(chatList);
+        recyclerView.setAdapter(chatAdapter);
+        LinearLayoutManager lm = new LinearLayoutManager (requireContext());
+        lm.setStackFromEnd(true);
+        recyclerView.setLayoutManager(lm);
+
+
+        sendButton.setOnClickListener(v -> {
+            String question = messageEditText.getText().toString().trim();
+            addToChat(question,Chat.SENT_BY_ME);
+        });
         return inflater.inflate(R.layout.fragment_chat, container, false);
+    }
+    void addToChat(String chat,String sentBy){
+        requireActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                chatList.add(new Chat(chat,sentBy));
+                chatAdapter.notifyDataSetChanged();
+                recyclerView.smoothScrollToPosition(chatAdapter.getItemCount());
+            }
+        });
+
+
     }
 }
