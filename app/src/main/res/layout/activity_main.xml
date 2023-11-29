@@ -27,10 +27,13 @@
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="2dp"
+        android:paddingBottom="80dp"
         app:layout_constraintBottom_toTopOf="@+id/bg_navbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.549" />
 
     <ImageView
         android:id="@+id/bg_navbar"
@@ -100,5 +103,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.961"
         app:srcCompat="@drawable/ic_ball" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="41dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ball_button"
+        app:layout_constraintEnd_toEndOf="@+id/ball_button"
+        app:layout_constraintStart_toStartOf="@+id/ball_button"
+        app:layout_constraintTop_toTopOf="@+id/ball_button"
+        app:srcCompat="@drawable/ic_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

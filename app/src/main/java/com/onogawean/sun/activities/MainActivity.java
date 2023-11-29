@@ -26,10 +26,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void setFragment(Class <? extends Fragment> fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .add(R.id.main_fragment , fragment, null)
-                .commit();
+        Fragment existingFragment = getSupportFragmentManager().findFragmentById(R.id.main_fragment);
+        if (existingFragment == null || !existingFragment.getClass().equals(fragment)) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.main_fragment , fragment, null)
+                    .commit();
+        }
+
     }
 
 
