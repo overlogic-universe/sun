@@ -27,7 +27,7 @@ public class ChatAdapter extends RecyclerView.Adapter <ChatAdapter.MyViewHolder>
         return myViewHolder;
     }
 
-    @Override
+    //@Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Chat chat = chatList.get(position);
         if(chat.getSentBy().equals(Chat.SENT_BY_ME)){

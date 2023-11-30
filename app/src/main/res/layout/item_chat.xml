@@ -6,7 +6,6 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         />
 
 
@@ -22,7 +21,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:textColor="@color/white"
             android:textSize="18sp"
             android:id="@+id/left_chat_text_view"
@@ -44,6 +42,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:id="@+id/right_chat_text_view"
+
             />
     </LinearLayout>
         

@@ -92,8 +92,9 @@ public class ChatFragment extends Fragment {
         sendButton.setOnClickListener(v -> {
             String question = messageEditText.getText().toString().trim();
             addToChat(question,Chat.SENT_BY_ME);
+
         });
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        return view;
     }
     void addToChat(String chat,String sentBy){
         requireActivity().runOnUiThread(new Runnable() {
