@@ -75,10 +75,9 @@ public class LoginFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         ImageView loginViewButton = view.findViewById(R.id.ic_arrow_login);
+
         EditText emailText, passText;
         Button submitButton;
-
-
         emailText = view.findViewById(R.id.login_email);
         passText = view.findViewById(R.id.login_password);
         submitButton = view.findViewById(R.id.login_button);
@@ -91,10 +90,12 @@ public class LoginFragment extends Fragment {
 
             if(TextUtils.isEmpty(email)){
                 emptyText.setVisibility(View.VISIBLE);
+                return ;
             }
 
             if(TextUtils.isEmpty(pass)){
                 emptyText.setVisibility(View.VISIBLE);
+                return ;
             }
 
         });

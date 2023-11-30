@@ -1,14 +1,28 @@
 package com.onogawean.sun.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import com.onogawean.sun.R;
 
@@ -27,6 +41,7 @@ public class RegisterFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private FirebaseAuth auth;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -63,9 +78,42 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_register, container, false);
+        EditText emailText, passText, nameText, confirmText;
+        Button submitButton;
+        emailText = view.findViewById(R.id.register_email);
+        passText = view.findViewById(R.id.register_password);
+        nameText = view.findViewById(R.id.register_name);
+        confirmText = view.findViewById(R.id.register_confirm);
+        submitButton = view.findViewById(R.id.register_button);
+        TextView errorText = view.findViewById(R.id.extraText);
+        auth = FirebaseAuth.getInstance();
 
-        ImageView registerViewButton = view.findViewById(R.id.ic_arrow_register);
 
+        submitButton.setOnClickListener(v ->{
+            String name, email, pass, confirm;
+            name = String.valueOf(nameText.getText());
+            email = String.valueOf(emailText.getText());
+            pass = String.valueOf(passText.getText());
+            confirm = String.valueOf(confirmText.getText());
+
+            if(TextUtils.isEmpty(email) || TextUtils.isEmpty(name) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(confirm))
+            {
+                errorText.setText("Tidak Boleh ada Field Kosong");
+                errorText.setVisibility(View.VISIBLE);
+            }else if(pass.length() < 8){
+                errorText.setText("Password Minimal Terdiri dari 8 Karakter");
+                errorText.setVisibility(View.VISIBLE);
+            }else if(!pass.equals(confirm)){
+                errorText.setText("Konfirmasi Password salah");
+                errorText.setVisibility(View.VISIBLE);
+            }
+            else{
+                errorText.setVisibility(View.INVISIBLE);
+                registerUser(email, pass);
+            }
+        });
+
+            ImageView registerViewButton = view.findViewById(R.id.ic_arrow_register);
         registerViewButton.setOnClickListener(v -> {
             Fragment loginFragment = new LoginFragment();
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -74,4 +122,18 @@ public class RegisterFragment extends Fragment {
 
         return view;
     }
+    private void registerUser(String email, String pass) {
+        auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Registration successful
+                            Toast.makeText(getContext(), "Register User Successful", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Registration failed
+                            Toast.makeText(getContext(), "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+        ;}
 }

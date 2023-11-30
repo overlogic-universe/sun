@@ -112,7 +112,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/register_email"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.894" />
 
         <ImageView
             android:id="@+id/ic_arrow_register"
@@ -158,7 +158,7 @@
         <Button
             android:id="@+id/register_button"
             android:layout_width="183dp"
-            android:layout_height="45dp"
+            android:layout_height="48dp"
             android:layout_marginTop="56dp"
             android:background="@drawable/rounded_background"
             android:fontFamily="@font/alata_regular"
@@ -192,7 +192,7 @@
             android:gravity="center"
             android:text="OR"
             android:textColor="@color/white_teal"
-            android:textSize="15dp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/register_button"
             app:layout_constraintStart_toEndOf="@+id/register_button"
             app:layout_constraintTop_toTopOf="@+id/register_button"
@@ -211,5 +211,22 @@
             app:layout_constraintTop_toTopOf="@+id/register_confirm"
             app:layout_constraintVertical_bias="0.235" />
 
+        <TextView
+            android:id="@+id/extraText"
+            android:layout_width="388dp"
+            android:layout_height="54dp"
+            android:text="Tidak Boleh ada Field yang Kosong"
+            android:textColor="#FF0000"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/pentagon_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_confirm"
+            app:layout_constraintVertical_bias="0.078" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>
