@@ -1,5 +1,6 @@
 package com.onogawean.sun.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.onogawean.sun.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,10 +60,16 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        //View view = inflater.inflate(R.layout.fragment_home, container, false);
+        //LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.fragment_home, container,false);
+
+        TextView titleBar = (TextView) view.findViewById(R.id.title_bar);
+        //titleBar.setText("Home");
+        return view;
     }
 }
