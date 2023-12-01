@@ -6,13 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Message;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.onogawean.sun.R;
 import com.onogawean.sun.adapter.ChatAdapter;
@@ -95,6 +94,25 @@ public class ChatFragment extends Fragment {
             messageEditText.setText("");
         });
         return view;
+    }
+    private void callRapid(String chat){
+        Thread th = new Thread(()->{
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\r\n    \"message\": \"Tell me about last news on Technology\"\r\n}");
+            Request request = new Request.Builder()
+                    .url("https://meta-llama-fast-api.p.rapidapi.com/mistralchat")
+                    .post(body)
+                    .addHeader("content-type", "application/json")
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("X-RapidAPI-Key", "3b660001c5msh2593b75351d638bp12dc5bjsn89380f4f8915")
+                    .addHeader("X-RapidAPI-Host", "meta-llama-fast-api.p.rapidapi.com")
+                    .build();
+
+            Response response = client.newCall(request).execute();});
+        th.start();
+
     }
     void addToChat(String chat,String sentBy){
         requireActivity().runOnUiThread(new Runnable() {

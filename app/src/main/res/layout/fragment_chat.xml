@@ -51,7 +51,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:padding="8dp"
-            android:src="@drawable/baseline_send_24"
+            android:src="@drawable/ic_send"
             android:background="?attr/selectableItemBackgroundBorderless"
             />
     </RelativeLayout>
