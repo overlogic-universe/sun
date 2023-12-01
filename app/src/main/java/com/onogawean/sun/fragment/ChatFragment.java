@@ -92,7 +92,7 @@ public class ChatFragment extends Fragment {
         sendButton.setOnClickListener(v -> {
             String question = messageEditText.getText().toString().trim();
             addToChat(question,Chat.SENT_BY_ME);
-
+            messageEditText.setText("");
         });
         return view;
     }

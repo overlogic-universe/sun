@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_background"
-        android:backgroundTint="#172B33"
+        android:backgroundTint="#00FFDB"
         android:padding="8dp"
         android:layout_alignParentEnd="true"
         android:id="@+id/right_chat_view"
