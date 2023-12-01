@@ -17,8 +17,15 @@ import com.onogawean.sun.R;
 import com.onogawean.sun.adapter.ChatAdapter;
 import com.onogawean.sun.model.Chat;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,6 +99,7 @@ public class ChatFragment extends Fragment {
             String question = messageEditText.getText().toString().trim();
             addToChat(question,Chat.SENT_BY_ME);
             messageEditText.setText("");
+            callRapid(question);
         });
         return view;
     }
@@ -106,11 +114,18 @@ public class ChatFragment extends Fragment {
                     .post(body)
                     .addHeader("content-type", "application/json")
                     .addHeader("Content-Type", "application/json")
-                    .addHeader("X-RapidAPI-Key", "3b660001c5msh2593b75351d638bp12dc5bjsn89380f4f8915")
+                    .addHeader("X-RapidAPI-Key", "")
                     .addHeader("X-RapidAPI-Host", "meta-llama-fast-api.p.rapidapi.com")
                     .build();
 
-            Response response = client.newCall(request).execute();});
+            try (Response response = client.newCall(request).execute()){
+                addToChat(response.body().string(),Chat.SENT_BY_BOT);
+
+            } catch (IOException e) {
+                addToChat("Nahida sedang pusing",Chat.SENT_BY_BOT);
+
+            }
+        });
         th.start();
 
     }
@@ -123,6 +138,7 @@ public class ChatFragment extends Fragment {
                 recyclerView.smoothScrollToPosition(chatAdapter.getItemCount());
             }
         });
+
 
 
     }
