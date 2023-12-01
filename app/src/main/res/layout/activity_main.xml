@@ -7,34 +7,18 @@
     tools:context=".activities.MainActivity"
     android:background="@color/teal_700">
 
-    <Button
-        android:id="@+id/sign_button"
-        android:layout_width="150dp"
-        android:layout_height="49dp"
-        android:background="@drawable/rounded_background"
-        android:fontFamily="@font/alata_regular"
-        android:text="Sign In"
-        android:textColor="@color/teal_100"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="2dp"
+        android:paddingHorizontal="5dp"
         android:paddingVertical="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.212" />
 
     <ImageView
         android:id="@+id/bg_navbar"
@@ -95,14 +79,13 @@
 
     <ImageView
         android:id="@+id/ball_button"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="72dp"
+        android:layout_height="66dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.961"
+        app:layout_constraintVertical_bias="0.963"
         app:srcCompat="@drawable/ic_ball" />
 
     <ImageView
@@ -175,7 +158,23 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.508" />
+
+            <Button
+                android:id="@+id/sign_button"
+                android:layout_width="81dp"
+                android:layout_height="41dp"
+                android:background="@drawable/rounded_background"
+                android:fontFamily="@font/alata_regular"
+                android:text="Sign In\ntemp"
+                android:textColor="@color/teal_100"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
