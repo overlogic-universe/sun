@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#10333E"
-    tools:context=".fragment.ChatFragment">
+    android:background="@drawable/bg_chatbackground"
+
+    tools:context=".fragment.ChatFragment"
+
+    >
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
