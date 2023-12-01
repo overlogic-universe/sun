@@ -108,7 +108,7 @@ public class ChatFragment extends Fragment {
             OkHttpClient client = new OkHttpClient();
 
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody body = RequestBody.create(mediaType, "{\r\n    \"message\": \"Tell me about last news on Technology\"\r\n}");
+            RequestBody body = RequestBody.create(mediaType,String.format("{\r\n    \"message\": \"%s\"\r\n}",chat));
             Request request = new Request.Builder()
                     .url("https://meta-llama-fast-api.p.rapidapi.com/mistralchat")
                     .post(body)
