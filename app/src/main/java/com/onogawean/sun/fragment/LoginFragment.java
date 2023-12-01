@@ -1,5 +1,6 @@
 package com.onogawean.sun.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.onogawean.sun.R;
@@ -35,7 +40,7 @@ public class LoginFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private FirebaseAuth auth;
 
 
     public LoginFragment() {
@@ -81,6 +86,7 @@ public class LoginFragment extends Fragment {
         emailText = view.findViewById(R.id.login_email);
         passText = view.findViewById(R.id.login_password);
         submitButton = view.findViewById(R.id.login_button);
+        auth = FirebaseAuth.getInstance();
 
         submitButton.setOnClickListener(v ->{
             String email, pass;
@@ -88,15 +94,14 @@ public class LoginFragment extends Fragment {
             pass = String.valueOf(passText.getText());
             TextView emptyText = view.findViewById(R.id.emptyText);
 
-            if(TextUtils.isEmpty(email)){
+            if(TextUtils.isEmpty(email) || TextUtils.isEmpty(pass)){
                 emptyText.setVisibility(View.VISIBLE);
                 return ;
+            }else {
+                loginUser(email, pass);
             }
 
-            if(TextUtils.isEmpty(pass)){
-                emptyText.setVisibility(View.VISIBLE);
-                return ;
-            }
+
 
         });
 
@@ -109,4 +114,15 @@ public class LoginFragment extends Fragment {
         });
         return view;
     }
+    public void loginUser(String email, String pass){
+        auth.signInWithEmailAndPassword(email, pass).addOnSuccessListener(requireActivity(), new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                Toast.makeText(getContext(), "Login telah Berhasil", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(requireActivity(), HomeFragment.class));
+                getActivity().finish();
+            }
+        });
+    }
+
 }

@@ -128,7 +128,9 @@ public class RegisterFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Registration successful
+                            // TODO change Toast to displayable text in user interface for both success and failed
                             Toast.makeText(getContext(), "Register User Successful", Toast.LENGTH_SHORT).show();
+                            // TODO guide user to login page after register is done
                         } else {
                             // Registration failed
                             Toast.makeText(getContext(), "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
