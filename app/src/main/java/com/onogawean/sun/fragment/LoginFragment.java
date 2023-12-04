@@ -42,7 +42,6 @@ public class LoginFragment extends Fragment {
     private String mParam2;
     private FirebaseAuth auth;
 
-
     public LoginFragment() {
         // Required empty public constructor
     }
@@ -99,6 +98,9 @@ public class LoginFragment extends Fragment {
                 return ;
             }else {
                 loginUser(email, pass);
+                //TODO Make the SignUP button disappear after user logged in
+                //TODO make logged in succes a diplayable text
+                //TODO add more eror handling
             }
 
 

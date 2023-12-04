@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.ImageView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-
+import com.google.firebase.auth.FirebaseUser;
 import com.onogawean.sun.R;
 import com.onogawean.sun.fragment.ChatFragment;
 import com.onogawean.sun.fragment.DashboardFragment;
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         dashboardButton = findViewById(R.id.dashboard_button);
         chatButton = findViewById(R.id.chat_button);
         settingsButton = findViewById(R.id.settings_button);
+
 
         goToRegister.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, LoginRegisterActivity.class));
