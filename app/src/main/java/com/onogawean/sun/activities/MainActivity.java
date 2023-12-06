@@ -2,6 +2,7 @@ package com.onogawean.sun.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -18,13 +19,14 @@ import com.onogawean.sun.fragment.ChatFragment;
 import com.onogawean.sun.fragment.DashboardFragment;
 import com.onogawean.sun.fragment.HomeFragment;
 import com.onogawean.sun.fragment.LoginFragment;
+import com.onogawean.sun.fragment.ProfileFragment;
 import com.onogawean.sun.fragment.RegisterFragment;
 import com.onogawean.sun.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     Button goToRegister;
-    ImageView homeButton, dashboardButton, chatButton, settingsButton;
+    ImageView homeButton, dashboardButton, chatButton, settingsButton, profileButton;
 
 
     public void setFragment(Class <? extends Fragment> fragment) {
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         dashboardButton = findViewById(R.id.dashboard_button);
         chatButton = findViewById(R.id.chat_button);
         settingsButton = findViewById(R.id.settings_button);
+        profileButton = findViewById(R.id.profile_button);
+
 
 
         goToRegister.setOnClickListener(v -> {
@@ -71,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
 
         settingsButton.setOnClickListener(v -> {
             setFragment(SettingsFragment.class);
+        });
+
+        profileButton.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         });
     }
 }

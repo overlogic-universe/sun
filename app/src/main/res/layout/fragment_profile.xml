@@ -17,10 +17,9 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916"
         app:srcCompat="@drawable/bg_chatbackground" />
 
     <ImageView
@@ -75,14 +74,17 @@
         android:id="@+id/inbox_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="248dp"
         android:fontFamily="@font/alata_regular"
         android:text="Inbox"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/notif_box"
         app:layout_constraintEnd_toEndOf="@+id/inbox_box"
-        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toEndOf="@+id/inbox_logo"
-        app:layout_constraintTop_toTopOf="@+id/pentagon_top" />
+        app:layout_constraintTop_toTopOf="@+id/pentagon_top"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/username_text"
@@ -135,10 +137,12 @@
         android:fontFamily="@font/alata_regular"
         android:text="Notification"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/notif_box"
         app:layout_constraintEnd_toEndOf="@+id/notif_box"
-        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintHorizontal_bias="0.129"
         app:layout_constraintStart_toEndOf="@+id/notification_logo"
-        app:layout_constraintTop_toTopOf="@+id/pentagon_top" />
+        app:layout_constraintTop_toTopOf="@+id/pentagon_top"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/signout_button"
@@ -149,15 +153,18 @@
         android:fontFamily="@font/alata_regular"
         android:text="Sign Out"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notif_box" />
+        app:layout_constraintTop_toBottomOf="@+id/notif_box"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="207dp"
         android:layout_marginBottom="436dp"
         android:fontFamily="@font/alata_regular"
         android:text="Inbox"
@@ -165,7 +172,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/pentagon_top"
         app:layout_constraintHorizontal_bias="0.162"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pentagon_top" />
 
     <TextView
         android:id="@+id/textView7"
