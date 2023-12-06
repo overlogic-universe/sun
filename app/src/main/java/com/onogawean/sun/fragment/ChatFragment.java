@@ -108,7 +108,7 @@ public class ChatFragment extends Fragment {
             OkHttpClient client = new OkHttpClient();
 
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody body = RequestBody.create(mediaType,String.format("{\r\n    \"message\": \"%s\"\r\n}",chat));
+            RequestBody body = RequestBody.create(mediaType,String.format("{ \"message\": \"%s\"}",chat));
             Request request = new Request.Builder()
                     .url("https://meta-llama-fast-api.p.rapidapi.com/mistralchat")
                     .post(body)
@@ -121,7 +121,7 @@ public class ChatFragment extends Fragment {
             try (Response response = client.newCall(request).execute()){
                 addToChat(response.body().string(),Chat.SENT_BY_BOT);
 
-            } catch (IOException e) {
+            }catch (IOException e) {
                 addToChat("Nahida sedang pusing",Chat.SENT_BY_BOT);
 
             }
