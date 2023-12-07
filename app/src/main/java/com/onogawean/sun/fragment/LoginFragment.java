@@ -24,6 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.onogawean.sun.R;
 
 import com.onogawean.sun.activities.LoginRegisterActivity;
+import com.onogawean.sun.activities.MainActivity;
 import com.onogawean.sun.fragment.RegisterFragment;
 /**
  * A simple {@link Fragment} subclass.
@@ -87,6 +88,8 @@ public class LoginFragment extends Fragment {
         submitButton = view.findViewById(R.id.login_button);
         auth = FirebaseAuth.getInstance();
 
+
+
         submitButton.setOnClickListener(v ->{
             String email, pass;
             email = String.valueOf(emailText.getText());
@@ -102,8 +105,6 @@ public class LoginFragment extends Fragment {
                 //TODO make logged in succes a diplayable text
                 //TODO add more eror handling
             }
-
-
 
         });
 
@@ -121,7 +122,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onSuccess(AuthResult authResult) {
                 Toast.makeText(getContext(), "Login telah Berhasil", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(requireActivity(), HomeFragment.class));
+                startActivity(new Intent(requireActivity(), MainActivity.class));
                 getActivity().finish();
             }
         });

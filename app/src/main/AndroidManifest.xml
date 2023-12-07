@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SelfUnitNoted"
-        tools:targetApi="28" >
+        tools:targetApi="s" >
         <activity
             android:name=".activities.LoginRegisterActivity"
             android:exported="true">

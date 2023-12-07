@@ -55,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
         settingsButton = findViewById(R.id.settings_button);
         profileButton = findViewById(R.id.profile_button);
 
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            // User is already logged in, hide the sign-in button
+            if (goToRegister != null) {
+                goToRegister.setVisibility(View.GONE);
+        }
+        }
 
 
         goToRegister.setOnClickListener(v -> {
@@ -81,4 +88,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         });
     }
+
 }

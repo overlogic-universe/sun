@@ -1,6 +1,7 @@
 package com.onogawean.sun.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import com.onogawean.sun.R;
+import com.onogawean.sun.activities.MainActivity;
 
 public class ProfileFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -72,8 +74,15 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        Button signOutButton = view.findViewById(R.id.signout_button);
+        signOutButton.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(this.getContext(), "Sign Out Berhasil", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(requireActivity(), MainActivity.class));
+            getActivity().finish();
+        });
 
         return view;
     }
