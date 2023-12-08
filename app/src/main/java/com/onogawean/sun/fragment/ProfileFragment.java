@@ -76,6 +76,9 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        TextView username = view.findViewById(R.id.username_text);
+        TextView pass = view.findViewById(R.id.email_text);
+
         Button signOutButton = view.findViewById(R.id.signout_button);
         signOutButton.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
