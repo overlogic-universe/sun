@@ -30,11 +30,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void setFragment(Class <? extends Fragment> fragment) {
-        Fragment existingFragment = getSupportFragmentManager().findFragmentById(R.id.main_fragment);
-        if (existingFragment == null || !existingFragment.getClass().equals(fragment)) {
+        Fragment existingFragment = getSupportFragmentManager().findFragmentByTag(fragment.getName());
+        String tag = fragment.getName();
+
+        if (existingFragment == null) {
+            try {
+                Fragment newFragment = fragment.newInstance();
+                getSupportFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .replace(R.id.main_fragment , newFragment, tag)
+                        .addToBackStack(null)
+                        .commit();
+            } catch (IllegalAccessException | InstantiationException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else {
             getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.main_fragment , fragment, null)
+                    .replace(R.id.main_fragment, existingFragment, tag)
                     .commit();
         }
 

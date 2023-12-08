@@ -15,7 +15,8 @@
         <ImageView
             android:id="@+id/presence_card"
             android:layout_width="match_parent"
-            android:layout_height="183dp"
+            android:layout_height="220dp"
+            android:layout_marginVertical="0dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/bg_rounded_transparent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,44 +27,128 @@
         <ImageView
             android:id="@+id/home_card"
             android:layout_width="match_parent"
-            android:layout_height="183dp"
-            android:layout_marginTop="288dp"
-            android:background="@drawable/rounded_background"
+            android:layout_height="247dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_fragment"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.444"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/presence_card"
+            app:layout_constraintVertical_bias="0.171" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/jam_matkul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/alata_regular"
             android:text="09:50"
-            android:textSize="40sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            android:textSize="50sp"
+            app:layout_constraintBottom_toTopOf="@+id/absen_hint"
             app:layout_constraintEnd_toEndOf="@+id/home_card"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/home_card"
             app:layout_constraintTop_toTopOf="@+id/home_card"
-            app:layout_constraintVertical_bias="0.161">
+            app:layout_constraintVertical_bias="0.666">
 
         </TextView>
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/absen_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="88dp"
+            android:layout_marginBottom="116dp"
             android:fontFamily="@font/alata_regular"
             android:text="Silahkan lakukan absen terlebih dahulu sebelum perkuliahan dimulai"
-            android:textSize="10sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/home_card"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintStart_toStartOf="@+id/textView4">
+            app:layout_constraintEnd_toEndOf="@+id/jam_matkul"
+            app:layout_constraintStart_toStartOf="@+id/jam_matkul">
 
         </TextView>
 
+        <TextView
+            android:id="@+id/btn_hadir"
+            android:layout_width="150dp"
+            android:layout_height="65dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_presence"
+            android:text="Masuk"
+            android:fontFamily="@font/alata_regular"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:layout_margin="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/home_card"
+            app:layout_constraintEnd_toStartOf="@+id/btn_izin"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/absen_hint"
+            app:layout_constraintVertical_bias="0.387" />
+
+        <TextView
+            android:id="@+id/btn_izin"
+            android:layout_width="150dp"
+            android:layout_height="65dp"
+            android:layout_margin="30dp"
+            android:fontFamily="@font/alata_regular"
+            android:gravity="center"
+            android:background="@drawable/btn_presence_right"
+            android:text="Izin"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/home_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/absen_hint"
+            app:layout_constraintVertical_bias="0.235" />
+
+        <TextView
+            android:id="@+id/nama_matkul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:fontFamily="@font/alata_regular"
+            android:textSize="25dp"
+            app:layout_constraintEnd_toEndOf="@+id/perteman_matkul"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/perteman_matkul"
+            app:layout_constraintTop_toTopOf="@+id/presence_card" />
+
+        <TextView
+            android:id="@+id/perteman_matkul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata_regular"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toTopOf="@+id/dosen_matkul"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/nama_matkul"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/dosen_matkul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="56dp"
+            android:fontFamily="@font/alata_regular"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="@+id/presence_card"
+            app:layout_constraintEnd_toEndOf="@+id/perteman_matkul"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/perteman_matkul" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_eclipes"
+            app:layout_constraintBottom_toBottomOf="@+id/dosen_matkul"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nama_matkul"
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
