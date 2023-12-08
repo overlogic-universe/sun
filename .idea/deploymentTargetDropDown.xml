@@ -2,7 +2,11 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+<<<<<<< HEAD
       <entry key="Android">
+=======
+      <entry key="app">
+>>>>>>> refs/remotes/origin/main
         <State />
       </entry>
     </value>
