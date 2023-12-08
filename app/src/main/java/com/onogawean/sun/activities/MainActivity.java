@@ -18,7 +18,7 @@ import com.onogawean.sun.R;
 import com.onogawean.sun.fragment.ChatFragment;
 import com.onogawean.sun.fragment.DashboardFragment;
 import com.onogawean.sun.fragment.HomeFragment;
-import com.onogawean.sun.fragment.LoginFragment;
+import com.onogawean.sun.fragmadent.LoginFragment;
 import com.onogawean.sun.fragment.ProfileFragment;
 import com.onogawean.sun.fragment.RegisterFragment;
 import com.onogawean.sun.fragment.SettingsFragment;
