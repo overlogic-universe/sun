@@ -1,10 +1,14 @@
 package com.onogawean.sun.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +22,7 @@ import com.onogawean.sun.R;
 import com.onogawean.sun.fragment.ChatFragment;
 import com.onogawean.sun.fragment.DashboardFragment;
 import com.onogawean.sun.fragment.HomeFragment;
-import com.onogawean.sun.fragmadent.LoginFragment;
+//import com.onogawean.sun.fragmadent.LoginFragment;
 import com.onogawean.sun.fragment.ProfileFragment;
 import com.onogawean.sun.fragment.RegisterFragment;
 import com.onogawean.sun.fragment.SettingsFragment;
@@ -27,7 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
     Button goToRegister;
     ImageView homeButton, dashboardButton, chatButton, settingsButton, profileButton;
-
+    SwitchCompat switchMode;
+    boolean nightMode;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     public void setFragment(Class <? extends Fragment> fragment) {
         Fragment existingFragment = getSupportFragmentManager().findFragmentByTag(fragment.getName());
@@ -100,6 +107,33 @@ public class MainActivity extends AppCompatActivity {
         profileButton.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         });
+
+
+        switchMode = findViewById(R.id.switchMode);
+        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        nightMode = sharedPreferences.getBoolean("nightMode", false);
+
+        if (nightMode){
+            switchMode.setChecked(true);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+
+//        switchMode.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view){
+//                if (nightMode){
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                    editor = sharedPreferences.edit();
+//                    editor.putBoolean("nightMode", false);
+//                } else {
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    editor = sharedPreferences.edit();
+//                    editor.putBoolean("nightMode", true);
+//                }
+//                editor.apply();
+//            }
+//        });
     }
 
 }
