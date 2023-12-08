@@ -137,7 +137,7 @@ public class MatkulAdapter extends RecyclerView.Adapter<MatkulAdapter.MyViewHold
 
     @Override
     public int getItemCount() {
-        return arr.size();
+f        return arr.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

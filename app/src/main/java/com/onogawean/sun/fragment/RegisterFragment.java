@@ -109,7 +109,7 @@ public class RegisterFragment extends Fragment {
             }
             else{
                 errorText.setVisibility(View.INVISIBLE);
-                registerUser(email, pass);
+                registerUser(email, pass, name);
             }
         });
 
@@ -122,11 +122,23 @@ public class RegisterFragment extends Fragment {
 
         return view;
     }
-    private void registerUser(String email, String pass) {
+    private void registerUser(String email, String pass, String name) {
         auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            //Generate user data on Firebase realtime database
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            String databasePath = String.format("mahasiswa");
+                            DatabaseReference databaseReference = database.getReference();
+                            //User user = new User(email,)
+                            String key = databaseReference.push().getKey();
+                            assert key != null;
+                            DatabaseReference mahasiswaRef = databaseReference.child(databasePath).child(key);
+                            mahasiswaRef.child("name").setValue(name);
+                            mahasiswaRef.child("email").setValue(email);
+                            mahasiswaRef.child("semester").setValue(1);
+
                             // Registration successful
                             // TODO change Toast to displayable text in user interface for both success and failed
                             Toast.makeText(getContext(), "Register User Successful", Toast.LENGTH_SHORT).show();
