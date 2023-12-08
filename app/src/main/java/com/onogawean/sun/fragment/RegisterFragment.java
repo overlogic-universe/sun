@@ -140,9 +140,11 @@ public class RegisterFragment extends Fragment {
                             mahasiswaRef.child("semester").setValue(1);
 
                             // Registration successful
-                            // TODO change Toast to displayable text in user interface for both success and failed
                             Toast.makeText(getContext(), "Register User Successful", Toast.LENGTH_SHORT).show();
                             // TODO guide user to login page after register is done
+                            Fragment loginFragment = new LoginFragment();
+                            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.login_register_fragment, loginFragment).commit();
                         } else {
                             // Registration failed
                             Toast.makeText(getContext(), "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();

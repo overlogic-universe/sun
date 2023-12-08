@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
             // User is already logged in, hide the sign-in button
             if (goToRegister != null) {
                 goToRegister.setVisibility(View.GONE);
+            profileButton.setOnClickListener(v -> {
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                });
         }
         }
 
@@ -97,9 +100,7 @@ public class MainActivity extends AppCompatActivity {
             setFragment(SettingsFragment.class);
         });
 
-        profileButton.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-        });
+
     }
 
 }
