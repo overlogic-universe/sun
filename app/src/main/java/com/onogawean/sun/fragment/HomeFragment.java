@@ -81,6 +81,22 @@ public class HomeFragment extends Fragment {
         });
         //TextView titleBar = (TextView) view.findViewById(R.id.title_bar);
         //titleBar.setText("Home");
+        TextView jadwalkuliahButton = view.findViewById(R.id.btn_jadwal_kuliah);
+        jadwalkuliahButton.setOnClickListener((v)->{
+            if (getActivity() != null) {
+                MainActivity mainActivity =  (MainActivity) getActivity();
+                mainActivity.setFragment(ModePengembang.class);
+            }
+
+        });
+        TextView khsButton = view.findViewById(R.id.btn_kartu_hasil_studi);
+        khsButton.setOnClickListener((v)->{
+            if (getActivity() != null) {
+                MainActivity mainActivity =  (MainActivity) getActivity();
+                mainActivity.setFragment(ModePengembang.class);
+            }
+
+        });
         return view;
     }
 }
