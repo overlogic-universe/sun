@@ -16,11 +16,14 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.onogawean.sun.R;
 
 import com.onogawean.sun.activities.LoginRegisterActivity;
@@ -42,6 +45,8 @@ public class LoginFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private FirebaseAuth auth;
+    int variable = 0;
+
 
     public LoginFragment() {
         // Required empty public constructor
@@ -86,6 +91,7 @@ public class LoginFragment extends Fragment {
         emailText = view.findViewById(R.id.login_email);
         passText = view.findViewById(R.id.login_password);
         submitButton = view.findViewById(R.id.login_button);
+        TextView emptyText = view.findViewById(R.id.emptyText);
         auth = FirebaseAuth.getInstance();
 
 
@@ -94,16 +100,23 @@ public class LoginFragment extends Fragment {
             String email, pass;
             email = String.valueOf(emailText.getText());
             pass = String.valueOf(passText.getText());
-            TextView emptyText = view.findViewById(R.id.emptyText);
 
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(pass)){
                 emptyText.setVisibility(View.VISIBLE);
                 return ;
             }else {
                 loginUser(email, pass);
-                //TODO Make the SignUP button disappear after user logged in
-                //TODO make logged in succes a diplayable text
-                //TODO add more eror handling
+                if(variable == 1){
+                    emptyText.setText("Email tidak terdaftar");
+                    emptyText.setVisibility(View.VISIBLE);
+                } else if (variable == 2) {
+                    emptyText.setText("Password tidak valid");
+                    emptyText.setVisibility(View.VISIBLE);
+                } else if (variable == 3) {
+                    emptyText.setText("Login gagal");
+                    emptyText.setVisibility(View.VISIBLE);
+                }
+
             }
 
         });
@@ -118,14 +131,34 @@ public class LoginFragment extends Fragment {
         return view;
     }
     public void loginUser(String email, String pass){
-        auth.signInWithEmailAndPassword(email, pass).addOnSuccessListener(requireActivity(), new OnSuccessListener<AuthResult>() {
+        auth.signInWithEmailAndPassword(email, pass)
+                .addOnSuccessListener(requireActivity(), new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
+                variable = 0;
                 Toast.makeText(getContext(), "Login telah Berhasil", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(requireActivity(), MainActivity.class));
                 getActivity().finish();
             }
-        });
+        })
+                .addOnFailureListener(requireActivity(), new OnFailureListener() {
+                    public void onFailure( Exception e) {
+                        // Handle login failure
+                        if (e instanceof FirebaseAuthInvalidUserException) {
+                            variable = 1;
+                            // User not registered
+                            Toast.makeText(getContext(), "Email tidak terdaftar", Toast.LENGTH_SHORT).show();
+                        } else if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                            variable = 2;
+                            // Invalid password
+                             Toast.makeText(getContext(), "Password tidak valid", Toast.LENGTH_SHORT).show();
+                        } else {
+                            variable = 3;
+                            // General error
+                            Toast.makeText(getContext(), "Login gagal", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
     }
 
-}
