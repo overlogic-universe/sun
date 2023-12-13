@@ -27,11 +27,12 @@ import com.onogawean.sun.R;
 import com.onogawean.sun.activities.LoginRegisterActivity;
 import com.onogawean.sun.adapter.DashboardAdapter;
 import com.onogawean.sun.adapter.MatkulAdapter;
+import com.onogawean.sun.adapter.PertemuanAdapter;
 
 import java.util.ArrayList;
 
 
-public class DashboardFragment extends Fragment {
+public class PertemuanFragment extends Fragment {
     private RecyclerView matkulRecyclerView;
     RecyclerView.LayoutManager layoutManager;
     ImageView matkulCard;
@@ -39,7 +40,7 @@ public class DashboardFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference mahasiswaRef, mataKuliahRef, absensiRef, serverStatus;
     FirebaseUser currentUser;
-    public DashboardFragment() {
+    public PertemuanFragment() {
         // Required empty public constructor
     }
 
@@ -71,34 +72,15 @@ public class DashboardFragment extends Fragment {
             userEmail = currentUser.getEmail();
         }
 
-        mahasiswaRef.orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    if (snapshot.exists()) {
-                        int semester = snapshot.child("semester").getValue(Integer.class);
-                        mataKuliahRef.child("semester_" + semester).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                ArrayList<String> mataKuliahList = (ArrayList<String>) snapshot.getValue();
-                                DashboardAdapter matkulAdapter = new DashboardAdapter(mataKuliahList);
-                                matkulRecyclerView.setAdapter(matkulAdapter);
-                                matkulRecyclerView.setHasFixedSize(true);
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Log.e("Firebase", "Error fetching data", error.toException());
-                            }
-                        });
+        ArrayList<String> pertemuanList = new ArrayList<>();
 
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("Firebase", "Error fetching data", databaseError.toException());
-            }
-        });
+        for (int i = 1; i <= 14; i++) {
+            pertemuanList.add(String.format("Pertemuan %d", i));
+        }
+        PertemuanAdapter matkulAdapter = new PertemuanAdapter(pertemuanList);
+        matkulRecyclerView.setAdapter(matkulAdapter);
+        matkulRecyclerView.setHasFixedSize(true);
+
         return view;
     }
 
