@@ -129,7 +129,7 @@ public class PertemuanAdapter extends RecyclerView.Adapter<PertemuanAdapter.MyVi
 
             bundle.putString("userid", userid);
             bundle.putString("matakuliah", nama_matkul);
-            bundle.putString("pertemuan", pertemuan.toString());
+            bundle.putString("pertemuan", String.format("%s", position));
 
             noteFragment.setArguments(bundle);
 
