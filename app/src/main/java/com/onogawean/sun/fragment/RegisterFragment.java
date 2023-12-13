@@ -1,11 +1,17 @@
 package com.onogawean.sun.fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.os.BuildCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import com.onogawean.sun.BuildConfig;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,10 +23,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,6 +56,7 @@ public class RegisterFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private FirebaseAuth auth;
+    GoogleSignInClient mGoogleSignInClient;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -86,8 +101,20 @@ public class RegisterFragment extends Fragment {
         confirmText = view.findViewById(R.id.register_confirm);
         submitButton = view.findViewById(R.id.register_button);
         TextView errorText = view.findViewById(R.id.extraText);
-        auth = FirebaseAuth.getInstance();
+        ImageView login_google = view.findViewById(R.id.login_google);
+        String webClientId = BuildConfig.WEB_CLIENT_ID;
 
+
+        GoogleSignInOptions gso= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(webClientId)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this.getContext() , gso);
+        auth = FirebaseAuth.getInstance();
+        login_google.setOnClickListener(v -> {
+                registerUser();
+        });
 
         submitButton.setOnClickListener(v ->{
             String name, email, pass, confirm;
@@ -152,4 +179,66 @@ public class RegisterFragment extends Fragment {
                     }
                 })
         ;}
+    int RC_SIGN_IN = 40 ;
+    private void registerUser(){
+        Intent intent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(intent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+         if(requestCode == RC_SIGN_IN){
+             if (resultCode == Activity.RESULT_CANCELED) {
+                 // Handle the case where Google Sign-In was canceled by the user.
+                 Toast.makeText(getContext(), "Google Sign-In was canceled", Toast.LENGTH_SHORT).show();
+             }else{
+             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+             try {
+                 GoogleSignInAccount account = task.getResult(ApiException.class);
+
+                googleFirebaseAuth(account.getIdToken());
+             } catch (ApiException e) {
+                 throw new RuntimeException(e);
+             }
+             }
+         }
+    }
+
+    private void googleFirebaseAuth(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+
+        auth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    FirebaseUser user = auth.getCurrentUser();
+                    String email = String.valueOf(user.getEmail());
+                    String name = String.valueOf(user.getDisplayName());
+
+                    //Generate user data on Firebase realtime database
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    String databasePath = String.format("mahasiswa");
+                    DatabaseReference databaseReference = database.getReference();
+                    //User user = new User(email,)
+                    String key = databaseReference.push().getKey();
+                    assert key != null;
+                    DatabaseReference mahasiswaRef = databaseReference.child(databasePath).child(key);
+                    mahasiswaRef.child("name").setValue(name);
+                    mahasiswaRef.child("email").setValue(email);
+                    mahasiswaRef.child("semester").setValue(1);
+
+                    // Registration successful
+                    Toast.makeText(getContext(), "Register User Successful", Toast.LENGTH_SHORT).show();
+                    // TODO guide user to login page after register is done
+                    Fragment loginFragment = new LoginFragment();
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.login_register_fragment, loginFragment).commit();
+                }
+                else {
+                    // Registration failed
+                    Toast.makeText(getContext(), "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 }
