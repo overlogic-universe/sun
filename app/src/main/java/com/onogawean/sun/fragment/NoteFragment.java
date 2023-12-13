@@ -19,7 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.onogawean.sun.R;
-
+import com.onogawean.sun.model.Note;
 
 
 /**
@@ -93,7 +93,7 @@ public class NoteFragment extends Fragment {
     private void saveNote() {
         String noteTitle= titleEditText.getText().toString();
         String noteContent = contentEditText.getText().toString();
-        if(noteTitle==null||noteTitle.isEmpty()){
+        if(noteTitle.isEmpty()){
             titleEditText.setError("Title is Required");
             return;
         }
@@ -106,17 +106,17 @@ public class NoteFragment extends Fragment {
     }
     void saveNoteFirebase(Note note){
         DocumentReference documentReference;
-        documentReference = Utility.getCollectionRefNote().document();
+        documentReference = UtilityNote.getCollectionRefNote().document();
         documentReference.set(note).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     if(getActivity() != null) {
-                        Utility.showToast(getActivity(), "Note Added Succesfully");
+                        UtilityNote.showToast(getActivity(), "Note Added Successfully");
                         getActivity().finish();
                     }
                 }else{
-                    Utility.showToast(getActivity(),"Note Failed to Added");
+                    UtilityNote.showToast(getActivity(),"Note Failed to Added");
                 }
             }
         });

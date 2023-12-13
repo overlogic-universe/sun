@@ -114,7 +114,7 @@ public class ChatFragment extends Fragment {
                     .post(body)
                     .addHeader("content-type", "application/json")
                     .addHeader("Content-Type", "application/json")
-                    .addHeader("X-RapidAPI-Key", "19f9971ac4msh92c5afc0a42329ep182e49jsn3f4c642b7305")
+                    .addHeader("X-RapidAPI-Key", "")
                     .addHeader("X-RapidAPI-Host", "meta-llama-fast-api.p.rapidapi.com")
                     .build();
 

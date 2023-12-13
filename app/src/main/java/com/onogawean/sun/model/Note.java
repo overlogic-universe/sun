@@ -1,4 +1,4 @@
-package com.onogawean.sun.fragment;
+package com.onogawean.sun.model;
 
 
 import com.google.firebase.Timestamp;

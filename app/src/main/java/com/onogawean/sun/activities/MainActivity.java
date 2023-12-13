@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         dashboardButton.setOnClickListener(v -> {
-            setFragment(DashboardFragment.class);
+            setFragment(NoteFragment.class);
         });
 
         chatButton.setOnClickListener(v -> {
