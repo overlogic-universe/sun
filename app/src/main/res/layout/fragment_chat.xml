@@ -27,9 +27,7 @@
         android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:padding="8dp"
-
         >
-
         <EditText
             android:id="@+id/message_edit_text"
             android:layout_width="match_parent"
@@ -38,8 +36,8 @@
             android:layout_toLeftOf="@id/send_btn"
             android:background="@drawable/rounded_background"
             android:hint="Ask Me Something"
-            android:padding="16dp" />
-
+            android:padding="16dp"
+            />
         <ImageButton
             android:id="@+id/send_btn"
             android:layout_width="60dp"
