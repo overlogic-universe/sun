@@ -39,6 +39,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import com.onogawean.sun.R;
+import com.onogawean.sun.activities.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -211,29 +212,35 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    FirebaseUser user = auth.getCurrentUser();
-                    String email = String.valueOf(user.getEmail());
-                    String name = String.valueOf(user.getDisplayName());
+                    boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                    if(isNewUser) {
+                        FirebaseUser user = auth.getCurrentUser();
+                        String email = String.valueOf(user.getEmail());
+                        String name = String.valueOf(user.getDisplayName());
 
-                    //Generate user data on Firebase realtime database
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    String databasePath = String.format("mahasiswa");
-                    DatabaseReference databaseReference = database.getReference();
-                    //User user = new User(email,)
-                    String key = databaseReference.push().getKey();
-                    assert key != null;
-                    DatabaseReference mahasiswaRef = databaseReference.child(databasePath).child(key);
-                    mahasiswaRef.child("name").setValue(name);
-                    mahasiswaRef.child("email").setValue(email);
-                    mahasiswaRef.child("semester").setValue(1);
+                        //Generate user data on Firebase realtime database
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        String databasePath = String.format("mahasiswa");
+                        DatabaseReference databaseReference = database.getReference();
+                        //User user = new User(email,)
+                        String key = databaseReference.push().getKey();
+                        assert key != null;
+                        DatabaseReference mahasiswaRef = databaseReference.child(databasePath).child(key);
+                        mahasiswaRef.child("name").setValue(name);
+                        mahasiswaRef.child("email").setValue(email);
+                        mahasiswaRef.child("semester").setValue(1);
 
-                    // Registration successful
-                    Toast.makeText(getContext(), "Register User Successful", Toast.LENGTH_SHORT).show();
-                    // TODO guide user to login page after register is done
-                    Fragment loginFragment = new LoginFragment();
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.login_register_fragment, loginFragment).commit();
-                }
+                        // Registration successful
+                        Toast.makeText(getContext(), "Register User Successful", Toast.LENGTH_SHORT).show();
+                        // TODO guide user to login page after register is done
+                        startActivity(new Intent(requireActivity(), MainActivity.class));
+                        getActivity().finish();
+                    }else{
+                        Fragment loginFragment = new LoginFragment();
+                        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.login_register_fragment, loginFragment).commit();
+                        Toast.makeText(getContext(), "Account with this email already exist, please login instead", Toast.LENGTH_SHORT).show();
+                    }}
                 else {
                     // Registration failed
                     Toast.makeText(getContext(), "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();

@@ -1,8 +1,17 @@
 package com.onogawean.sun.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.onogawean.sun.BuildConfig;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -16,6 +25,14 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -46,6 +63,7 @@ public class LoginFragment extends Fragment {
     private String mParam2;
     private FirebaseAuth auth;
     int variable = 0;
+    GoogleSignInClient mGoogleSignInClient;
 
 
     public LoginFragment() {
@@ -92,7 +110,21 @@ public class LoginFragment extends Fragment {
         passText = view.findViewById(R.id.login_password);
         submitButton = view.findViewById(R.id.login_button);
         TextView emptyText = view.findViewById(R.id.emptyText);
+        ImageView login_google = view.findViewById(R.id.login_google);
         auth = FirebaseAuth.getInstance();
+        String webClientId = BuildConfig.WEB_CLIENT_ID;
+
+
+        GoogleSignInOptions gso= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(webClientId)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this.getContext() , gso);
+        auth = FirebaseAuth.getInstance();
+        login_google.setOnClickListener(v -> {
+            loginUser();
+        });
 
 
 
@@ -159,6 +191,50 @@ public class LoginFragment extends Fragment {
                         }
                     }
                 });
+    }
+    private static final int RC_SIGN_IN = 9001;
+    public void loginUser(){
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == RC_SIGN_IN){
+            if (resultCode == Activity.RESULT_CANCELED) {
+                // Handle the case where Google Sign-In was canceled by the user.
+                Toast.makeText(getContext(), "Google Sign-In was canceled", Toast.LENGTH_SHORT).show();
+            }else{
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+                try {
+                    GoogleSignInAccount account = task.getResult(ApiException.class);
+
+                    googleFirebaseAuth(account.getIdToken());
+                } catch (ApiException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+    private void googleFirebaseAuth(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+
+        auth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    boolean isNewUser = task.getResult().getAdditionalUserInfo().isNewUser();
+                    if(isNewUser) {
+                        Toast.makeText(getContext(), "Account with this email is not exist, please register instead", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getContext(), "Login success", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(requireActivity(), MainActivity.class));
+                        getActivity().finish();
+                    }}
+                else {
+                    // Registration failed
+                    Toast.makeText(getContext(), "Registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     }
 
