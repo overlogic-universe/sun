@@ -22,6 +22,7 @@ import com.onogawean.sun.fragment.LoginFragment;
 import com.onogawean.sun.fragment.ProfileFragment;
 import com.onogawean.sun.fragment.RegisterFragment;
 import com.onogawean.sun.fragment.SettingsFragment;
+import com.onogawean.sun.fragment.NoteFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         dashboardButton.setOnClickListener(v -> {
-            setFragment(DashboardFragment.class);
+            setFragment(NoteFragment.class);
         });
 
         chatButton.setOnClickListener(v -> {
