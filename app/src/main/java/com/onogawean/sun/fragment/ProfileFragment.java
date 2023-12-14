@@ -120,6 +120,15 @@ public class ProfileFragment extends Fragment {
             getActivity().finish();
         });
 
+        ImageView notifButton = view.findViewById(R.id.notif_box);
+        notifButton.setOnClickListener((v)->{
+            if (getActivity() != null) {
+                MainActivity mainActivity =  (MainActivity) getActivity();
+                mainActivity.setFragment(ModePengembang.class);
+            }
+
+        });
+
         return view;
     }
 }
