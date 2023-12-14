@@ -83,5 +83,4 @@ public class PertemuanFragment extends Fragment {
 
         return view;
     }
-
 }

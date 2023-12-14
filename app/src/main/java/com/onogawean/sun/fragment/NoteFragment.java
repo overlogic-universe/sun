@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,17 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.onogawean.sun.R;
+import com.onogawean.sun.adapter.NoteAdapter;
 import com.onogawean.sun.model.Note;
 
 
@@ -31,7 +38,12 @@ public class NoteFragment extends Fragment {
 
 
     EditText titleEditText,contentEditText;
-    ImageButton saveNote;
+    ImageButton CreatNote;
+
+    RecyclerView recyclerView;
+    FirebaseUser firebaseUser;
+    FirebaseFirestore firebaseFirestore;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,13 +96,17 @@ public class NoteFragment extends Fragment {
         View view =inflater.inflate(R.layout.fragment_note, container, false);
         titleEditText = view.findViewById(R.id.EditTitle);
         contentEditText = view.findViewById(R.id.EditContent);
-        saveNote = view.findViewById(R.id.addButton);
-        saveNote.setOnClickListener((v) -> saveNote());
+        CreatNote = view.findViewById(R.id.addButton);
+        CreatNote.setOnClickListener((v) -> CreateNote());
+
+
         return view;
+
 
     }
 
-    private void saveNote() {
+
+    private void CreateNote() {
         String noteTitle= titleEditText.getText().toString();
         String noteContent = contentEditText.getText().toString();
         if(noteTitle.isEmpty()){
@@ -111,14 +127,15 @@ public class NoteFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    if(getActivity() != null) {
-                        UtilityNote.showToast(getActivity(), "Note Added Successfully");
-                        getActivity().finish();
-                    }
-                }else{
+                    UtilityNote.showToast(getActivity(), "Note Added Successfully");
+                    getActivity().finish();
+
+                }
+                else{
                     UtilityNote.showToast(getActivity(),"Note Failed to Added");
                 }
             }
         });
     }
+
 }
