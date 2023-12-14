@@ -122,10 +122,8 @@ public class ProfileFragment extends Fragment {
 
         ImageView notifButton = view.findViewById(R.id.notif_box);
         notifButton.setOnClickListener((v)->{
-            if (getActivity() != null) {
-                MainActivity mainActivity =  (MainActivity) getActivity();
-                mainActivity.setFragment(ModePengembang.class);
-            }
+            FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction().setReorderingAllowed(true);
+            fragmentTransaction.add(R.id.login_register_fragment, new Notifikasi()).commit();
 
         });
 
