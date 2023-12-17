@@ -16,7 +16,7 @@
 
     <style name="ScreenBackground"><item name="android:background">@color/white</item></style>
     <style name="CardBackground"><item name="android:background">@color/white</item></style>
-    <style name="TextColor"><item name="android:textColor">@color/darkGrey</item></style>
+    <style name="TextColor"><item name="android:textColor">@color/white</item></style>
 
 
 </resources>
